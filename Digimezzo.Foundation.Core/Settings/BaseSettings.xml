@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <!-- 
+  Your application needs a BaseSettings.xml file in its main directory. 
+  That file must contain the "Configuration" namespace below. The "Version" 
+  setting in the "Configuration" namespace can be used to perform migrations. 
+  You can add as many other namespaces and settings as you wish.
+  -->
+  <Namespace Name="Configuration">
+    <Setting Name="Version">
+      <Value>0</Value>
+    </Setting>
+    <Setting Name="IsPortable">
+      <Value>False</Value>
+    </Setting>
+  </Namespace>
+</Settings>

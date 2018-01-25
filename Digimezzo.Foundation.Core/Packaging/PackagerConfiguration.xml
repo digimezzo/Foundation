@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- This is the XML structure expected by PackageCreator -->
+<Packager>
+  <Publishing>
+    <ParentDirectory>folder/subfolder/</ParentDirectory>
+    <ApiUrl>https://www.mywebsite.com/updateapi.php?function=addversion</ApiUrl>
+  </Publishing>
+  <Packaging>
+    <PackageDirectory>C:\Temp\Applicationname</PackageDirectory>
+    <Installable>
+      <WixBinDirectory>C:\Program Files (x86)\WiX Toolset v3.10\bin</WixBinDirectory>
+    </Installable>
+    <Portable>
+      <Directories>
+        <Directory>Directory1</Directory>
+        <Directory>Directory2</Directory>
+      </Directories>
+      <Files>
+        <File>Application.exe</File>
+        <File>Application.exe.config</File>
+        <File>Changelog.txt</File>
+        <File>Library1.dll</File>
+        <File>Library2.dll</File>
+        <File>Library3.dll</File>
+      </Files>
+    </Portable>
+  </Packaging>
+</Packager>
+

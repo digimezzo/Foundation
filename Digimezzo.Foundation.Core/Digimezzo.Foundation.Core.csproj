@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F376CCCA-325F-4533-934D-A9C4A7CFC69B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Digimezzo.Foundation.Core</RootNamespace>
+    <AssemblyName>Digimezzo.Foundation.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\NameValue.cs" />
+    <Compile Include="Helpers\OperationResult.cs" />
+    <Compile Include="Helpers\Taskbar.cs" />
+    <Compile Include="IO\Actions.cs" />
+    <Compile Include="IO\ProcessExecutable.cs" />
+    <Compile Include="IO\WindowsPaths.cs" />
+    <Compile Include="Logging\LogClient.cs" />
+    <Compile Include="Logging\LogEntry.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Packaging\ExternalComponent.cs" />
+    <Compile Include="Packaging\Package.cs" />
+    <Compile Include="Packaging\PackageCreator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\SettingChangedEventArgs.cs" />
+    <Compile Include="Settings\SettingEntry.cs" />
+    <Compile Include="Settings\SettingsClient.cs" />
+    <Compile Include="SharedAssemblyInfo.cs" />
+    <Compile Include="Utils\CryptographyUtils.cs" />
+    <Compile Include="Utils\DateTimeUtils.cs" />
+    <Compile Include="Utils\EnvironmentUtils.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\ImageUtils.cs" />
+    <Compile Include="Utils\ResourceUtils.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Utils\ValidationUtils.cs" />
+    <Compile Include="Utils\VisualTreeUtils.cs" />
+    <Compile Include="Utils\WindowUtils.cs" />
+    <Compile Include="Win32\ABE.cs" />
+    <Compile Include="Win32\ABM.cs" />
+    <Compile Include="Win32\ABS.cs" />
+    <Compile Include="Win32\AccentPolicy.cs" />
+    <Compile Include="Win32\AccentState.cs" />
+    <Compile Include="Win32\APPBARDATA.cs" />
+    <Compile Include="Win32\FileOperationFlags.cs" />
+    <Compile Include="Win32\FileOperationType.cs" />
+    <Compile Include="Win32\GWL.cs" />
+    <Compile Include="Win32\NativeMethods.cs" />
+    <Compile Include="Win32\RECT.cs" />
+    <Compile Include="Win32\SHFileOperationReturnCode.cs" />
+    <Compile Include="Win32\SHFILEOPSTRUCT.cs" />
+    <Compile Include="Win32\WindowCompositionAttribute.cs" />
+    <Compile Include="Win32\WindowCompositionAttributeData.cs" />
+    <Compile Include="Win32\WS.cs" />
+    <Compile Include="Win32\WSEX.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Packaging\PackagerConfiguration.xml" />
+    <Content Include="Settings\BaseSettings.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
