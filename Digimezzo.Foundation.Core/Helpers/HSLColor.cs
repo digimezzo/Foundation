@@ -13,45 +13,68 @@ namespace Digimezzo.Foundation.Core.Helpers
         {
             get
             {
-                var t = (int)(hue * 60d);
+                var t = (int)(this.hue * 60d);
+
                 if (t > 360)
+                {
                     t -= 360;
+                }
+
                 return t;
             }
             set
             {
                 var t = value;
+
                 if (t > 0)
+                {
                     while (t > 360)
+                    {
                         t -= 360;
+                    }
+                }
+
                 else
+                {
                     while (t < 0)
+                    {
                         t += 360;
-                hue = t / 60d;
+                    } 
+                }
+
+                this.hue = t / 60d;
             }
         }
 
         public int Saturation
         {
-            get { return (int)(saturation * 100d); }
+            get { return (int)(this.saturation * 100d); }
             set
             {
                 if (value < 0 || value > 100)
+                {
                     throw new ArgumentOutOfRangeException("Saturation", "Saturation only can be set between 0 and 100");
+                }
                 else
-                    saturation = value / 100d;
+                {
+                    this.saturation = value / 100d;
+                }   
             }
         }
 
         public int Luminosity
         {
-            get { return (int)(luminosity * 100d); }
+            get { return (int)(this.luminosity * 100d); }
             set
             {
                 if (value < 0 || value > 100)
+                {
                     throw new ArgumentOutOfRangeException("Luminosity", "Luminosity only can be set between 0 and 100");
+                }
                 else
-                    luminosity = value / 100d;
+                {
+                    this.luminosity = value / 100d;
+                }   
             }
         }
 
@@ -72,30 +95,33 @@ namespace Digimezzo.Foundation.Core.Helpers
         public Color ToRgb()
         {
             byte r, g, b;
-            if (Saturation == 0)
+
+            if (this.Saturation == 0)
             {
-                r = (byte)Math.Round(luminosity * 255d);
-                g = (byte)Math.Round(luminosity * 255d);
-                b = (byte)Math.Round(luminosity * 255d);
+                r = (byte)Math.Round(this.luminosity * 255d);
+                g = (byte)Math.Round(this.luminosity * 255d);
+                b = (byte)Math.Round(this.luminosity * 255d);
             }
             else
             {
                 double t1, t2;
-                double th = hue / 6.0d;
+                double th = this.hue / 6.0d;
 
-                if (luminosity < 0.5d)
+                if (this.luminosity < 0.5d)
                 {
-                    t2 = luminosity * (1d + saturation);
+                    t2 = this.luminosity * (1d + this.saturation);
                 }
                 else
                 {
-                    t2 = (luminosity + saturation) - (luminosity * saturation);
+                    t2 = (this.luminosity + this.saturation) - (this.luminosity * this.saturation);
                 }
-                t1 = 2d * luminosity - t2;
+
+                t1 = 2d * this.luminosity - t2;
 
                 var tr = th + (1.0d / 3.0d);
                 var tg = th;
                 var tb = th - (1.0d / 3.0d);
+
                 tr = ColorCalc(tr, t1, t2);
                 tg = ColorCalc(tg, t1, t2);
                 tb = ColorCalc(tb, t1, t2);
@@ -126,6 +152,7 @@ namespace Digimezzo.Foundation.Core.Helpers
             var delta = max - min;
 
             double h = 0, s = 0, l = (max + min) / 2d;
+
             if (delta != 0)
             {
                 if (l < 0.5d)
@@ -152,7 +179,10 @@ namespace Digimezzo.Foundation.Core.Helpers
 
         public static Color Normalize(Color color, int value)
         {
-            if (value < 0 | value > 100) return color;
+            if (value < 0 | value > 100)
+            {
+                return color;
+            }
 
             HSLColor hslColor = HSLColor.GetFromRgb(color);
 
@@ -170,11 +200,31 @@ namespace Digimezzo.Foundation.Core.Helpers
 
         private static double ColorCalc(double c, double t1, double t2)
         {
-            if (c < 0) c += 1d;
-            if (c > 1) c -= 1d;
-            if (6.0d * c < 1.0d) return t1 + (t2 - t1) * 6.0d * c;
-            if (2.0d * c < 1.0d) return t2;
-            if (3.0d * c < 2.0d) return t1 + (t2 - t1) * (2.0d / 3.0d - c) * 6.0d;
+            if (c < 0)
+            {
+                c += 1d;
+            }
+
+            if (c > 1)
+            {
+                c -= 1d;
+            }
+
+            if (6.0d * c < 1.0d)
+            {
+                return t1 + (t2 - t1) * 6.0d * c;
+            }
+
+            if (2.0d * c < 1.0d)
+            {
+                return t2;
+            }
+
+            if (3.0d * c < 2.0d)
+            {
+                return t1 + (t2 - t1) * (2.0d / 3.0d - c) * 6.0d;
+            }
+
             return t1;
         }
     }
