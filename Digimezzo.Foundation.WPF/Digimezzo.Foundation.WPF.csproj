@@ -56,6 +56,49 @@
     <Compile Include="..\Digimezzo.Foundation.Core\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Base\BorderlessWindowBase.cs" />
+    <Compile Include="Base\Constants.cs" />
+    <Compile Include="Base\PropertyChangedBase.cs" />
+    <Compile Include="Base\SliderBase.cs" />
+    <Compile Include="Controls\BorderlessWindows10Window.cs" />
+    <Compile Include="Controls\BorderlessWindows8Window.cs" />
+    <Compile Include="Controls\LabelToLower.cs" />
+    <Compile Include="Controls\LabelToUpper.cs" />
+    <Compile Include="Controls\MaterialButtons.cs" />
+    <Compile Include="Controls\MaterialComboBox.cs" />
+    <Compile Include="Controls\MaterialDateBox.cs" />
+    <Compile Include="Controls\MaterialTextBox.cs" />
+    <Compile Include="Controls\MaterialToggleSwitch.cs" />
+    <Compile Include="Controls\MultiPanePanel.cs" />
+    <Compile Include="Controls\MultiSelectListBox.cs" />
+    <Compile Include="Controls\PageIndicator.cs" />
+    <Compile Include="Controls\Pivot.cs" />
+    <Compile Include="Controls\ProgressRing.cs" />
+    <Compile Include="Controls\Ripple.cs" />
+    <Compile Include="Controls\SlidingContentControl.cs" />
+    <Compile Include="Controls\SplitView.cs" />
+    <Compile Include="Controls\ToggleSwitch.cs" />
+    <Compile Include="Controls\UWPSlider.cs" />
+    <Compile Include="Controls\VirtualizingWrapPanel.cs" />
+    <Compile Include="Controls\Windows10Slider.cs" />
+    <Compile Include="Controls\Windows10ToggleSwitch.cs" />
+    <Compile Include="Controls\Windows8Slider.cs" />
+    <Compile Include="Converters\AddValueConverter.cs" />
+    <Compile Include="Converters\BooleanToCollapsedConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\InvertingBooleanConverter.cs" />
+    <Compile Include="Converters\NullToCollapsedConverter.cs" />
+    <Compile Include="Converters\NullToVisibleConverter.cs" />
+    <Compile Include="Converters\ResizeModeMinMaxButtonVisibilityConverter.cs" />
+    <Compile Include="Converters\SolidColorBrushToColorConverter.cs" />
+    <Compile Include="Converters\StringToLowerConverter.cs" />
+    <Compile Include="Converters\StringToUpperConverter.cs" />
+    <Compile Include="Effects\FeatheringEffect.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Native\Constants.cs" />
+    <Compile Include="Native\Enums.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
+    <Compile Include="Native\Structs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -69,10 +112,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Utils\AnimationUtils.cs" />
+    <Compile Include="Utils\UriUtils.cs" />
+    <Compile Include="Utils\VisualTreeUtils.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Effects\FeatheringEffect.ps" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -83,6 +130,105 @@
       <Project>{f376ccca-325f-4533-934d-a9c4a7cfc69b}</Project>
       <Name>Digimezzo.Foundation.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Effects\FeatheringEffect.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Licenses\MahApps.Metro.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\BorderlessWindows10Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\BorderlessWindows8Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\LabelToLower.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\LabelToUpper.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MaterialButtons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MaterialComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MaterialDateBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MaterialTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MaterialToggleSwitch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MultiPanePanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\PageIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Pivot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ProgressRing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Ripple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SlidingContentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SplitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ToggleSwitch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\UwpSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Windows10Slider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Windows10ToggleSwitch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Windows8Slider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
