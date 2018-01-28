@@ -7,10 +7,10 @@
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converters:InvertingBooleanToVisibilityConverter x:Key="InvertingBooleanToVisibilityConverter" />
 
-    <Style TargetType="{x:Type controls:ToggleSwitch}">
+    <Style TargetType="{x:Type controls:Windows8ToggleSwitch}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:ToggleSwitch}">
+                <ControlTemplate TargetType="{x:Type controls:Windows8ToggleSwitch}">
                     <DockPanel>
                         <Grid DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,20,0">
                             <Label 
@@ -20,8 +20,8 @@
                                 FontFamily="{TemplateBinding FontFamily}"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Content="{Binding Path=OnLabel, RelativeSource={RelativeSource AncestorType={x:Type controls:ToggleSwitch}}}" 
-                                Visibility="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type controls:ToggleSwitch}},Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                Content="{Binding Path=OnLabel, RelativeSource={RelativeSource AncestorType={x:Type controls:Windows8ToggleSwitch}}}" 
+                                Visibility="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type controls:Windows8ToggleSwitch}},Converter={StaticResource BooleanToVisibilityConverter}}"/>
                             <Label 
                                 x:Name="PART_OffLabel" 
                                 FontWeight="{TemplateBinding FontWeight}"
@@ -29,8 +29,8 @@
                                 FontFamily="{TemplateBinding FontFamily}"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                Content="{Binding Path=OffLabel, RelativeSource={RelativeSource AncestorType={x:Type controls:ToggleSwitch}}}" 
-                                Visibility="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type controls:ToggleSwitch}},Converter={StaticResource InvertingBooleanToVisibilityConverter}}"/>
+                                Content="{Binding Path=OffLabel, RelativeSource={RelativeSource AncestorType={x:Type controls:Windows8ToggleSwitch}}}" 
+                                Visibility="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type controls:Windows8ToggleSwitch}},Converter={StaticResource InvertingBooleanToVisibilityConverter}}"/>
                         </Grid>
                         <Canvas x:Name="PART_Canvas" Background="#00000000" Height="14" Width="46" Cursor="Hand" HorizontalAlignment="Right">
                             <Rectangle x:Name="PART_Bar" Canvas.Left="0" Canvas.Top="4" Panel.ZIndex="0" Height="6" Width="46" Fill="{TemplateBinding SwitchBackground}"/>
@@ -38,7 +38,7 @@
                                 <Rectangle.Style>
                                     <Style>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type controls:ToggleSwitch}}}" Value="True">
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type controls:Windows8ToggleSwitch}}}" Value="True">
                                                 <DataTrigger.EnterActions>
                                                     <BeginStoryboard>
                                                         <Storyboard>
@@ -78,7 +78,7 @@
                         <Trigger Property="IsChecked" Value="False">
                             <Setter TargetName="PART_Bar" Property="Opacity" Value="0.3" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type controls:ToggleSwitch}}}" Value="True">
+                        <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource AncestorType={x:Type controls:Windows8ToggleSwitch}}}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

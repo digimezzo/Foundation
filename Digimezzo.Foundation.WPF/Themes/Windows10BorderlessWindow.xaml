@@ -7,10 +7,10 @@
     <converters:BooleanToCollapsedConverter x:Key="BooleanToCollapsedConverter" />
     <converters:ResizeModeMinMaxButtonVisibilityConverter x:Key="ResizeModeMinMaxButtonVisibilityConverter" />
 
-    <Style TargetType="{x:Type controls:BorderlessWindows10Window}">
+    <Style TargetType="{x:Type controls:Windows10BorderlessWindow}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:BorderlessWindows10Window}">
+                <ControlTemplate TargetType="{x:Type controls:Windows10BorderlessWindow}">
                     <AdornerDecorator>
                         <Border x:Name="PART_Border">
                             <Grid>

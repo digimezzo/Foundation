@@ -58,13 +58,20 @@
     </Compile>
     <Compile Include="Base\BorderlessWindowBase.cs" />
     <Compile Include="Base\Constants.cs" />
+    <Compile Include="Base\MaterialButtonBase.cs" />
     <Compile Include="Base\PropertyChangedBase.cs" />
     <Compile Include="Base\SliderBase.cs" />
-    <Compile Include="Controls\BorderlessWindows10Window.cs" />
-    <Compile Include="Controls\BorderlessWindows8Window.cs" />
+    <Compile Include="Controls\MaterialFlatButton.cs" />
+    <Compile Include="Controls\MaterialFloatingActionButton.cs" />
+    <Compile Include="Controls\MaterialMiniFloatingActionButton.cs" />
+    <Compile Include="Controls\MaterialRaisedButton.cs" />
+    <Compile Include="Controls\UWPSliderHorizontalBottom.cs" />
+    <Compile Include="Controls\UWPSliderVertical.cs" />
+    <Compile Include="Controls\Windows10BorderlessWindow.cs" />
+    <Compile Include="Controls\Windows10SliderVertical.cs" />
+    <Compile Include="Controls\Windows8BorderlessWindow.cs" />
     <Compile Include="Controls\LabelToLower.cs" />
     <Compile Include="Controls\LabelToUpper.cs" />
-    <Compile Include="Controls\MaterialButtons.cs" />
     <Compile Include="Controls\MaterialComboBox.cs" />
     <Compile Include="Controls\MaterialDateBox.cs" />
     <Compile Include="Controls\MaterialTextBox.cs" />
@@ -77,12 +84,13 @@
     <Compile Include="Controls\Ripple.cs" />
     <Compile Include="Controls\SlidingContentControl.cs" />
     <Compile Include="Controls\SplitView.cs" />
-    <Compile Include="Controls\ToggleSwitch.cs" />
-    <Compile Include="Controls\UWPSlider.cs" />
+    <Compile Include="Controls\Windows8ToggleSwitch.cs" />
+    <Compile Include="Controls\UWPSliderHorizontal.cs" />
     <Compile Include="Controls\VirtualizingWrapPanel.cs" />
-    <Compile Include="Controls\Windows10Slider.cs" />
+    <Compile Include="Controls\Windows10SliderHorizontal.cs" />
     <Compile Include="Controls\Windows10ToggleSwitch.cs" />
-    <Compile Include="Controls\Windows8Slider.cs" />
+    <Compile Include="Controls\Windows8SliderHorizontal.cs" />
+    <Compile Include="Controls\Windows8SliderVertical.cs" />
     <Compile Include="Converters\AddValueConverter.cs" />
     <Compile Include="Converters\BooleanToCollapsedConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -141,11 +149,43 @@
     <Resource Include="Licenses\MahApps.Metro.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\BorderlessWindows10Window.xaml">
+    <Page Include="Themes\MaterialFlatButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MaterialFloatingActionButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MaterialMiniFloatingActionButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\MaterialRaisedButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\UWPSliderHorizontal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\UWPSliderHorizontalBottom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\UWPSliderVertical.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Windows10BorderlessWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\BorderlessWindows8Window.xaml">
+    <Page Include="Themes\Windows10SliderVertical.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Windows8BorderlessWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -158,10 +198,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\LabelToUpper.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MaterialButtons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -209,15 +245,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\ToggleSwitch.xaml">
+    <Page Include="Themes\Windows8SliderVertical.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Windows8ToggleSwitch.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\UwpSlider.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Windows10Slider.xaml">
+    <Page Include="Themes\Windows10SliderHorizontal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -225,7 +261,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Windows8Slider.xaml">
+    <Page Include="Themes\Windows8SliderHorizontal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

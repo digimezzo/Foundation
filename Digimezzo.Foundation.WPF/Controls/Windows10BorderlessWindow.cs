@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace Digimezzo.Foundation.WPF.Controls
 {
-    public class BorderlessWindows10Window : BorderlessWindowBase
+    public class Windows10BorderlessWindow : BorderlessWindowBase
     {
         public bool ApplyDefaultButtonColors
         {
@@ -15,9 +15,9 @@ namespace Digimezzo.Foundation.WPF.Controls
         public static readonly DependencyProperty ApplyDefaultButtonColorsProperty =
             DependencyProperty.Register(nameof(ApplyDefaultButtonColors), typeof(bool), typeof(BorderlessWindowBase), new PropertyMetadata(true));
 
-        static BorderlessWindows10Window()
+        static Windows10BorderlessWindow()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(BorderlessWindows10Window), new FrameworkPropertyMetadata(typeof(BorderlessWindows10Window)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Windows10BorderlessWindow), new FrameworkPropertyMetadata(typeof(Windows10BorderlessWindow)));
         }
 
         public override void OnApplyTemplate()

@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace Digimezzo.Foundation.WPF.Controls
 {
-    public class ToggleSwitch : CheckBox
+    public class Windows8ToggleSwitch : CheckBox
     {
         private Label onLabel;
         private Label offLabel;
@@ -18,7 +18,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         }
 
         public static readonly DependencyProperty SwitchBackgroundProperty =
-          DependencyProperty.Register(nameof(SwitchBackground), typeof(Brush), typeof(ToggleSwitch), new PropertyMetadata(new SolidColorBrush(Colors.Blue)));
+          DependencyProperty.Register(nameof(SwitchBackground), typeof(Brush), typeof(Windows8ToggleSwitch), new PropertyMetadata(new SolidColorBrush(Colors.Blue)));
    
         public Brush ThumbBackground
         {
@@ -27,7 +27,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         }
 
         public static readonly DependencyProperty ThumbBackgroundProperty =
-           DependencyProperty.Register(nameof(ThumbBackground), typeof(Brush), typeof(ToggleSwitch), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
+           DependencyProperty.Register(nameof(ThumbBackground), typeof(Brush), typeof(Windows8ToggleSwitch), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
        
         public string OnLabel
         {
@@ -36,7 +36,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         }
 
         public static readonly DependencyProperty OnLabelProperty =
-           DependencyProperty.Register(nameof(OnLabel), typeof(string), typeof(ToggleSwitch), new PropertyMetadata("On"));
+           DependencyProperty.Register(nameof(OnLabel), typeof(string), typeof(Windows8ToggleSwitch), new PropertyMetadata("On"));
         
         public string OffLabel
         {
@@ -45,11 +45,11 @@ namespace Digimezzo.Foundation.WPF.Controls
         }
 
         public static readonly DependencyProperty OffLabelProperty =
-            DependencyProperty.Register(nameof(OffLabel), typeof(string), typeof(ToggleSwitch), new PropertyMetadata("Off"));
+            DependencyProperty.Register(nameof(OffLabel), typeof(string), typeof(Windows8ToggleSwitch), new PropertyMetadata("Off"));
 
-        static ToggleSwitch()
+        static Windows8ToggleSwitch()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ToggleSwitch), new FrameworkPropertyMetadata(typeof(ToggleSwitch)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Windows8ToggleSwitch), new FrameworkPropertyMetadata(typeof(Windows8ToggleSwitch)));
         }
   
         public override void OnApplyTemplate()
