@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Digimezzo.Foundation.Core.Helpers;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -52,15 +53,6 @@ namespace Digimezzo.Foundation.WPF.Controls
         public static readonly DependencyProperty IsFloatingProperty =
             DependencyProperty.Register(nameof(IsFloating), typeof(bool), typeof(MaterialTextBox), new PropertyMetadata(false));
 
-        public bool UseLightCursor
-        {
-            get { return (bool)GetValue(UseLightCursorProperty); }
-            set { SetValue(UseLightCursorProperty, value); }
-        }
-
-        public static readonly DependencyProperty UseLightCursorProperty =
-            DependencyProperty.Register(nameof(UseLightCursor), typeof(bool), typeof(MaterialTextBox), new PropertyMetadata(false));
-
         public string Label
         {
             get { return (string)GetValue(LabelProperty); }
@@ -110,6 +102,19 @@ namespace Digimezzo.Foundation.WPF.Controls
         static MaterialTextBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MaterialTextBox), new FrameworkPropertyMetadata(typeof(MaterialTextBox)));
+            ForegroundProperty.OverrideMetadata(typeof(MaterialTextBox), new FrameworkPropertyMetadata(null, OnForegroundChanged));
+        }
+
+        private static void OnForegroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if(!(d is MaterialTextBox))
+            {
+                return;
+
+            }
+
+            var box  = (MaterialTextBox)d;
+            box.SetCursorColor();
         }
 
         public override void OnApplyTemplate()
@@ -132,14 +137,7 @@ namespace Digimezzo.Foundation.WPF.Controls
 
             this.SelectionBrush = this.Accent; // Binding SelectionBrush in the xaml template doesn't work, so we set it here.
 
-            // This workaround changes the color of the cursor
-            if (this.UseLightCursor)
-            {
-                this.Background = new SolidColorBrush(Colors.Black); 
-            }
-            else {
-                this.Background = new SolidColorBrush(Colors.White);
-            }
+            this.SetCursorColor();
 
             // Initial state of the input label
             if (this.IsFloating)
@@ -152,6 +150,19 @@ namespace Digimezzo.Foundation.WPF.Controls
             }
 
             this.Validate();
+        }
+
+        private void SetCursorColor()
+        {
+            if (!(this.Foreground is SolidColorBrush))
+            {
+                return;
+            }
+
+            // This workaround changes the color of the cursor
+            // WPF sets it to the inverse of the Background color  
+            var col = ((SolidColorBrush)this.Foreground).Color;
+            this.Background = new SolidColorBrush(Color.FromRgb((byte)~col.R, (byte)~col.G, (byte)~col.B));
         }
 
         private void Validate()

@@ -10,6 +10,7 @@ namespace Digimezzo.Foundation.WPF.Controls
 {
     public class MaterialComboBox : ComboBox
     {
+        private TextBox editableTextBox;
         private TextBlock inputLabel;
         private bool previousIsFloating;
         private Grid panel;
@@ -62,6 +63,19 @@ namespace Digimezzo.Foundation.WPF.Controls
         static MaterialComboBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MaterialComboBox), new FrameworkPropertyMetadata(typeof(MaterialComboBox)));
+            ForegroundProperty.OverrideMetadata(typeof(MaterialComboBox), new FrameworkPropertyMetadata(null, OnForegroundChanged));
+        }
+
+        private static void OnForegroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(d is MaterialComboBox))
+            {
+                return;
+
+            }
+
+            var box = (MaterialComboBox)d;
+            box.SetCursorColor();
         }
 
         public override void OnApplyTemplate()
@@ -73,6 +87,7 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.inputLineUnfocused = (Border)GetTemplateChild("PART_InputLineUnfocused");
             this.dropDownBorder = (Border)GetTemplateChild("DropDownBorder");
             this.panel = (Grid)GetTemplateChild("PART_Panel");
+            this.editableTextBox = (TextBox)GetTemplateChild("PART_EditableTextBox");
             this.toggleButton.Opacity = this.opacity;
             this.inputLineUnfocused.Opacity = this.opacity;
             this.inputLabel.Text = this.Label;
@@ -80,6 +95,25 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.inputLabel.MouseDown += InputLabel_MouseDown;
             this.panel.Margin = this.IsFloating ? new Thickness(0, this.GetSmallFontSize() + this.GetMargin(), 0, 0) : new Thickness(0);
             this.dropDownBorder.Background = this.Background == null ? Brushes.White : this.Background;
+        }
+
+        private void SetCursorColor()
+        {
+            if (!(this.Foreground is SolidColorBrush))
+            {
+                return;
+            }
+
+            // This workaround changes the color of the cursor
+            // WPF sets it to the inverse of the Background color  
+            if (this.editableTextBox == null)
+            {
+                return;
+            }
+
+            var col = ((SolidColorBrush)this.Foreground).Color;
+            this.editableTextBox.Background = new SolidColorBrush(Color.FromRgb((byte)~col.R, (byte)~col.G, (byte)~col.B));
+            //this.Background = new SolidColorBrush(Color.FromRgb((byte)~col.R, (byte)~col.G, (byte)~col.B));
         }
 
         private void InputLabel_MouseDown(object sender, MouseButtonEventArgs e)

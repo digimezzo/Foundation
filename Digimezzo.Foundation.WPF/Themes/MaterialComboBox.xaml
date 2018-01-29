@@ -31,7 +31,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
-        <Border x:Name="PART_ContentHost" Padding="3" Focusable="False" Background="{TemplateBinding Background}" />
+        <Border x:Name="PART_ContentHost" Padding="3" Focusable="False" />
     </ControlTemplate>
 
     <Style x:Key="ComboBoxItem" TargetType="{x:Type ComboBoxItem}">
@@ -105,6 +105,7 @@
                                 Focusable="True" 
                                 Background="Transparent"
                                 Visibility="Hidden"
+                                Foreground="{TemplateBinding Foreground}"
                                 IsReadOnly="{TemplateBinding IsReadOnly}"/>
                             <Grid>
                                 <Border x:Name="PART_InputLineUnfocused" Panel.ZIndex="0" SnapsToDevicePixels="True" Height="1" Background="{TemplateBinding Foreground}"/>
