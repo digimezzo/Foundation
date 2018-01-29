@@ -97,6 +97,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Digimezzo.Foundation.Core\Digimezzo.Foundation.Core.csproj">
+      <Project>{f376ccca-325f-4533-934d-a9c4a7cfc69b}</Project>
+      <Name>Digimezzo.Foundation.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Digimezzo.Foundation.WPF\Digimezzo.Foundation.WPF.csproj">
       <Project>{db02d05f-5fd8-4d14-b446-354de8b4791e}</Project>
       <Name>Digimezzo.Foundation.WPF</Name>
