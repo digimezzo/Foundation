@@ -8,9 +8,10 @@ using System.Windows.Media.Animation;
 
 namespace Digimezzo.Foundation.WPF.Controls
 {
-    public class MaterialComboBox : ComboBox
+    public class MaterialComboBox : ComboBox, IDisposable
     {
         private TextBox editableTextBox;
+        private TextBlock errorLabel;
         private TextBlock inputLabel;
         private bool previousIsFloating;
         private Grid panel;
@@ -22,6 +23,42 @@ namespace Digimezzo.Foundation.WPF.Controls
         private Border dropDownBorder;
 
         public TextBlock InputLabel => this.inputLabel;
+
+        public Brush ErrorForeground
+        {
+            get { return (Brush)GetValue(ErrorForegroundProperty); }
+            set { SetValue(ErrorForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty ErrorForegroundProperty =
+            DependencyProperty.Register(nameof(ErrorForeground), typeof(Brush), typeof(MaterialComboBox), new PropertyMetadata(Brushes.Red));
+
+        public string ErrorText
+        {
+            get { return (string)GetValue(ErrorTextProperty); }
+            set { SetValue(ErrorTextProperty, value); }
+        }
+
+        public static readonly DependencyProperty ErrorTextProperty =
+            DependencyProperty.Register(nameof(ErrorText), typeof(string), typeof(MaterialComboBox), new PropertyMetadata("Invalid"));
+
+        public bool IsValid
+        {
+            get { return (bool)GetValue(IsValidProperty); }
+            set { SetValue(IsValidProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsValidProperty =
+           DependencyProperty.Register(nameof(IsValid), typeof(bool), typeof(MaterialComboBox), new PropertyMetadata(true));
+
+        public ValidationMode ValidationMode
+        {
+            get { return (ValidationMode)GetValue(ValidationModeProperty); }
+            set { SetValue(ValidationModeProperty, value); }
+        }
+
+        public static readonly DependencyProperty ValidationModeProperty =
+            DependencyProperty.Register(nameof(ValidationMode), typeof(ValidationMode), typeof(MaterialComboBox), new PropertyMetadata(ValidationMode.None));
 
         public bool IsFloating
         {
@@ -88,6 +125,7 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.dropDownBorder = (Border)GetTemplateChild("DropDownBorder");
             this.panel = (Grid)GetTemplateChild("PART_Panel");
             this.editableTextBox = (TextBox)GetTemplateChild("PART_EditableTextBox");
+            this.errorLabel = (TextBlock)GetTemplateChild("PART_ErrorLabel");
             this.toggleButton.Opacity = this.opacity;
             this.inputLineUnfocused.Opacity = this.opacity;
             this.inputLabel.Text = this.Label;
@@ -95,6 +133,16 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.inputLabel.MouseDown += InputLabel_MouseDown;
             this.panel.Margin = this.IsFloating ? new Thickness(0, this.GetSmallFontSize() + this.GetMargin(), 0, 0) : new Thickness(0);
             this.dropDownBorder.Background = this.Background == null ? Brushes.White : this.Background;
+
+            this.errorLabel.FontSize = this.GetSmallFontSize();
+            this.errorLabel.Margin = this.ValidationMode.Equals(ValidationMode.None) || this.ValidationMode.Equals(ValidationMode.Date) ? new Thickness(0) : new Thickness(0, this.GetMargin(), 0, 0);
+
+            this.editableTextBox.TextChanged += this.EditableTextBox_TextChanged;
+        }
+
+        private void EditableTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            this.Validate();
         }
 
         private void SetCursorColor()
@@ -155,6 +203,8 @@ namespace Digimezzo.Foundation.WPF.Controls
             {
                 this.SetInputLabelText(this.Text.Length > 0);
             }
+
+            this.Validate();
         }
 
         private void SetInputLabelText(bool mustClear)
@@ -248,5 +298,87 @@ namespace Digimezzo.Foundation.WPF.Controls
                 this.inputLine.Width = this.ActualWidth;
             }
         }
+
+        private void Validate()
+        {
+            switch (this.ValidationMode)
+            {
+                case ValidationMode.Number:
+                    this.ValidateNumber();
+                    break;
+                case ValidationMode.Text:
+                    this.ValidateText();
+                    break;
+                case ValidationMode.Date:
+                case ValidationMode.None:
+                default:
+                    break;
+            }
+        }
+
+        private void ValidateText()
+        {
+            if (string.IsNullOrWhiteSpace(this.Text))
+            {
+                this.errorLabel.Text = this.ErrorText;
+                this.IsValid = false;
+            }
+            else
+            {
+                this.errorLabel.Text = String.Empty;
+                this.IsValid = true;
+            }
+        }
+
+        private void ValidateNumber()
+        {
+            bool isNumberValid = false;
+
+            if (string.IsNullOrEmpty(this.Text))
+            {
+                isNumberValid = false;
+            }
+            else
+            {
+                double number = 0;
+                isNumberValid = double.TryParse(this.Text, out number);
+            }
+
+            if (isNumberValid)
+            {
+                this.errorLabel.Text = String.Empty;
+                this.IsValid = true;
+            }
+            else
+            {
+                this.errorLabel.Text = this.ErrorText;
+                this.IsValid = false;
+            }
+        }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    if(this.editableTextBox != null)
+                    {
+                        this.editableTextBox.TextChanged -= this.EditableTextBox_TextChanged;
+                    }
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+        #endregion
     }
 }

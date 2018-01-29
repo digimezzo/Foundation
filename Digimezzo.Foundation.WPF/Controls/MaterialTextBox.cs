@@ -148,8 +148,6 @@ namespace Digimezzo.Foundation.WPF.Controls
             {
                 this.SetInputLabelText(this.Text.Length > 0);
             }
-
-            this.Validate();
         }
 
         private void SetCursorColor()

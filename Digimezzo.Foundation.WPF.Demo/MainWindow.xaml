@@ -3,10 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Digimezzo.Foundation.WPF.Demo"
+        xmlns:controls="clr-namespace:Digimezzo.Foundation.WPF.Controls;assembly=Digimezzo.Foundation.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        <StackPanel>
+            <controls:MaterialComboBox ValidationMode="Text" Margin="20" IsEditable="True">
+                <TextBlock>dd</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock>ss</TextBlock>
+            </controls:MaterialComboBox>
+        </StackPanel>
         
     </Grid>
 </Window>

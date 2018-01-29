@@ -96,5 +96,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Digimezzo.Foundation.WPF\Digimezzo.Foundation.WPF.csproj">
+      <Project>{db02d05f-5fd8-4d14-b446-354de8b4791e}</Project>
+      <Name>Digimezzo.Foundation.WPF</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
