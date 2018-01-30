@@ -9,6 +9,7 @@
         <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialFloatingActionButton.xaml" />
         <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialMiniFloatingActionButton.xaml" />
         <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialRaisedButton.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialCircularProgressBar.xaml" />
         <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialComboBox.xaml" />
         <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialDateBox.xaml" />
         <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialTextBox.xaml" />

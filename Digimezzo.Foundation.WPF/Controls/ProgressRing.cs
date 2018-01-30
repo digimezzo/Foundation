@@ -6,7 +6,7 @@ using System.Windows.Controls;
 namespace Digimezzo.Foundation.WPF.Controls
 {
     /// <summary>
-    /// ProgressRing is based on code from MahApps.Metro: https://github.com/MahApps/MahApps.Metro
+    /// This code is based on code from MahApps.Metro: https://github.com/MahApps/MahApps.Metro
     /// Their license is included in the "Licenses" folder.
     /// </summary>
     [TemplateVisualState(Name = "Large", GroupName = "SizeStates")]

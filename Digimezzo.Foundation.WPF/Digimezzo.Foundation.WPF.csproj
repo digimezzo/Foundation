@@ -61,6 +61,7 @@
     <Compile Include="Base\MaterialButtonBase.cs" />
     <Compile Include="Base\PropertyChangedBase.cs" />
     <Compile Include="Base\SliderBase.cs" />
+    <Compile Include="Controls\MaterialCircularProgressBar.cs" />
     <Compile Include="Controls\MaterialFlatButton.cs" />
     <Compile Include="Controls\MaterialFloatingActionButton.cs" />
     <Compile Include="Controls\MaterialMiniFloatingActionButton.cs" />
@@ -95,6 +96,14 @@
     <Compile Include="Converters\BooleanToCollapsedConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\InvertingBooleanConverter.cs" />
+    <Compile Include="Converters\MaterialCircularProgressBar\ArcEndPointConverter.cs" />
+    <Compile Include="Converters\MaterialCircularProgressBar\ArcSizeConverter.cs" />
+    <Compile Include="Converters\MaterialCircularProgressBar\LargeArcConverter.cs" />
+    <Compile Include="Converters\MaterialCircularProgressBar\LocalEx.cs" />
+    <Compile Include="Converters\MaterialCircularProgressBar\NotZeroConverter.cs" />
+    <Compile Include="Converters\MaterialCircularProgressBar\RotateTransformCentreConverter.cs" />
+    <Compile Include="Converters\MaterialCircularProgressBar\RotateTransformConverter.cs" />
+    <Compile Include="Converters\MaterialCircularProgressBar\StartPointConverter.cs" />
     <Compile Include="Converters\NullToCollapsedConverter.cs" />
     <Compile Include="Converters\NullToVisibleConverter.cs" />
     <Compile Include="Converters\ResizeModeMinMaxButtonVisibilityConverter.cs" />
@@ -149,6 +158,10 @@
     <Resource Include="Licenses\MahApps.Metro.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\MaterialCircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\MaterialFlatButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -265,6 +278,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Licenses\MaterialDesignInXamlToolkit.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

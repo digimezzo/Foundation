@@ -13,7 +13,7 @@
                 <TextBlock></TextBlock>
                 <TextBlock>ss</TextBlock>
             </controls:MaterialComboBox>
+            <controls:MaterialCircularProgressBar Accent="Blue" Margin="20" IsIndeterminate="True"/>
         </StackPanel>
-        
     </Grid>
 </Window>
