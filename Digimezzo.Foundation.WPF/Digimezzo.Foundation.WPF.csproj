@@ -58,9 +58,11 @@
     </Compile>
     <Compile Include="Base\BorderlessWindowBase.cs" />
     <Compile Include="Base\Constants.cs" />
+    <Compile Include="Base\FontIconBase.cs" />
     <Compile Include="Base\MaterialButtonBase.cs" />
     <Compile Include="Base\PropertyChangedBase.cs" />
     <Compile Include="Base\SliderBase.cs" />
+    <Compile Include="Controls\FontIcons.cs" />
     <Compile Include="Controls\MaterialCircularProgressBar.cs" />
     <Compile Include="Controls\MaterialFlatButton.cs" />
     <Compile Include="Controls\MaterialFloatingActionButton.cs" />
@@ -137,6 +139,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Effects\FeatheringEffect.ps" />
+    <Resource Include="Fonts\MaterialIcons-Regular.ttf" />
+    <Resource Include="Fonts\Roboto-Thin.ttf" />
+    <Resource Include="Fonts\segmdl2.ttf" />
+    <Resource Include="Fonts\fontawesome-webfont.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -158,6 +164,10 @@
     <Resource Include="Licenses\MahApps.Metro.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\FontIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\MaterialCircularProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

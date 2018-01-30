@@ -8,12 +8,18 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel>
-            <controls:MaterialComboBox ValidationMode="Text" Margin="20" IsEditable="True">
-                <TextBlock>dd</TextBlock>
-                <TextBlock></TextBlock>
-                <TextBlock>ss</TextBlock>
-            </controls:MaterialComboBox>
-            <controls:MaterialCircularProgressBar Accent="Blue" Margin="20" IsIndeterminate="True"/>
+            <DockPanel>
+                <controls:FAIcon DockPanel.Dock="Left" Text="&#xf0f4;" FontSize="30" Margin="20"/>
+                <TextBlock Text="Font Awesome!" FontSize="20" VerticalAlignment="Center"/>
+            </DockPanel>
+            <DockPanel>
+                <controls:SegoeIcon DockPanel.Dock="Left" Text="&#xEB52;" FontSize="30" Margin="20"/>
+                <TextBlock Text="Segoe MDL2 Assets!" FontSize="20" VerticalAlignment="Center"/>
+            </DockPanel>
+            <DockPanel>
+                <controls:MaterialIcon DockPanel.Dock="Left" Text="&#xE859;" FontSize="30" Margin="20"/>
+                <TextBlock Text="Material Icons!" FontSize="20" VerticalAlignment="Center"/>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Window>
