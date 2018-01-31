@@ -7,11 +7,66 @@ using System.Windows.Media.Animation;
 
 namespace Digimezzo.Foundation.WPF.Controls
 {
-    public class SplitView : Control
+    public class SplitView : Control, IDisposable
     {
         private ContentPresenter pane;
         private ContentPresenter content;
         private Border overlay;
+        private Button button;
+
+        public Brush ButtonHoveredBackground
+        {
+            get { return (Brush)GetValue(ButtonHoveredBackgroundProperty); }
+            set { SetValue(ButtonHoveredBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonHoveredBackgroundProperty =
+           DependencyProperty.Register(nameof(ButtonHoveredBackground), typeof(Brush), typeof(SplitView), new PropertyMetadata(null));
+
+        public Brush ButtonPressedBackground
+        {
+            get { return (Brush)GetValue(ButtonPressedBackgroundProperty); }
+            set { SetValue(ButtonPressedBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonPressedBackgroundProperty =
+           DependencyProperty.Register(nameof(ButtonPressedBackground), typeof(Brush), typeof(SplitView), new PropertyMetadata(null));
+
+        public bool ShowButton
+        {
+            get { return (bool)GetValue(ShowButtonProperty); }
+            set { SetValue(ShowButtonProperty, value); }
+        }
+
+        public static readonly DependencyProperty ShowButtonProperty =
+           DependencyProperty.Register(nameof(ShowButton), typeof(bool), typeof(SplitView), new PropertyMetadata(true));
+
+        public double ButtonWidth
+        {
+            get { return (double)GetValue(ButtonWidthProperty); }
+            set { SetValue(ButtonWidthProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonWidthProperty =
+           DependencyProperty.Register(nameof(ButtonWidth), typeof(double), typeof(SplitView), new PropertyMetadata(48.0));
+
+        public double ButtonHeight
+        {
+            get { return (double)GetValue(ButtonHeightProperty); }
+            set { SetValue(ButtonHeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonHeightProperty =
+           DependencyProperty.Register(nameof(ButtonHeight), typeof(double), typeof(SplitView), new PropertyMetadata(48.0));
+
+        public object ButtonContent
+        {
+            get { return (object)GetValue(ButtonContentProperty); }
+            set { SetValue(ButtonContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty ButtonContentProperty =
+           DependencyProperty.Register(nameof(ButtonContent), typeof(object), typeof(SplitView), new PropertyMetadata(null));
 
         public Brush OverlayBackground
         {
@@ -88,6 +143,7 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.pane = (ContentPresenter)GetTemplateChild("PART_Pane");
             this.content = (ContentPresenter)GetTemplateChild("PART_Content");
             this.overlay = (Border)GetTemplateChild("PART_Overlay");
+            this.button = (Button)GetTemplateChild("PART_Button");
 
             if (this.pane != null)
             {
@@ -98,6 +154,16 @@ namespace Digimezzo.Foundation.WPF.Controls
             {
                 this.content.MouseUp += Content_MouseUp;
             }
+
+            if(this.button != null)
+            {
+                this.button.Click += Button_Click;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsPaneOpen = !this.IsPaneOpen;
         }
 
         private void Content_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -148,7 +214,7 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         private void ShowOverlayAnimation()
         {
-            if(this.overlay == null)
+            if (this.overlay == null)
             {
                 return;
             }
@@ -183,5 +249,30 @@ namespace Digimezzo.Foundation.WPF.Controls
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UserControl.OpacityProperty));
             sb.Begin(this.overlay);
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    if(this.button != null)
+                    {
+                        this.button.Click -= Button_Click;
+                    }
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+        #endregion
     }
 }
