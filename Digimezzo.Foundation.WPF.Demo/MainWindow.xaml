@@ -1,25 +1,58 @@
-﻿<Window x:Class="Digimezzo.Foundation.WPF.Demo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:Digimezzo.Foundation.WPF.Controls;assembly=Digimezzo.Foundation.WPF"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+﻿<fc:Windows10BorderlessWindow x:Class="Digimezzo.Foundation.WPF.Demo.MainWindow"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:fc="clr-namespace:Digimezzo.Foundation.WPF.Controls;assembly=Digimezzo.Foundation.WPF"
+                              mc:Ignorable="d"
+                              Title="MainWindow" Height="350" Width="525">
+
+    <!-- Resources -->
+    <Window.Resources>
+        <Style x:Key="HamburgerButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="#00000000">
+                            <Border x:Name="ButtonBorder"/>
+                            <fc:MaterialIcon Text="&#xE5D2;" FontSize="24"  
+                                             HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="ButtonBorder" Property="Background" 
+                                        Value="{DynamicResource Brush_HamburgerButtonHovered}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- Content -->
     <Grid>
-        <StackPanel>
-            <DockPanel>
-                <controls:FAIcon DockPanel.Dock="Left" Text="&#xf0f4;" FontSize="30" Margin="20"/>
-                <TextBlock Text="Font Awesome!" FontSize="20" VerticalAlignment="Center"/>
-            </DockPanel>
-            <DockPanel>
-                <controls:SegoeIcon DockPanel.Dock="Left" Text="&#xEB52;" FontSize="30" Margin="20"/>
-                <TextBlock Text="Segoe MDL2 Assets!" FontSize="20" VerticalAlignment="Center"/>
-            </DockPanel>
-            <DockPanel>
-                <controls:MaterialIcon DockPanel.Dock="Left" Text="&#xE859;" FontSize="30" Margin="20"/>
-                <TextBlock Text="Material Icons!" FontSize="20" VerticalAlignment="Center"/>
-            </DockPanel>
-        </StackPanel>
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Panel.ZIndex="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!-- Hamburger -->
+            <Button x:Name="HamburgerButton" Grid.Column="0" Style="{StaticResource HamburgerButtonStyle}" 
+                    HorizontalAlignment="Left" Width="48" Height="48" />
+            <Border x:Name="MainTitleBar" Grid.Column="1" Background="Transparent"/>
+        </Grid>
+        <fc:SplitView x:Name="MySplitView" Panel.ZIndex="0" IsPaneOpen="False" OpenPaneLength="300">
+            
+            <fc:SplitView.Pane>
+                <TextBlock></TextBlock>
+            </fc:SplitView.Pane>
+            <fc:SplitView.Content>
+                <TextBlock></TextBlock>
+            </fc:SplitView.Content>
+        </fc:SplitView>
     </Grid>
-</Window>
+</fc:Windows10BorderlessWindow>

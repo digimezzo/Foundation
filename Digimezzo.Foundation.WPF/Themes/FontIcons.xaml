@@ -6,10 +6,10 @@
     <FontFamily x:Key="MaterialIcons">/Digimezzo.Foundation.WPF;component/Fonts/#Material Icons</FontFamily>
     <FontFamily x:Key="SegoeAssets">/Digimezzo.Foundation.WPF;component/Fonts/#Segoe MDL2 Assets</FontFamily>
 
-    <Style TargetType="{x:Type controls:FAIcon}">
+    <Style TargetType="{x:Type controls:AwesomeIcon}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:FAIcon}">
+                <ControlTemplate TargetType="{x:Type controls:AwesomeIcon}">
                     <TextBlock FontFamily="{StaticResource FontAwesome}" Text="{TemplateBinding Text}" 
                                Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" />
                 </ControlTemplate>

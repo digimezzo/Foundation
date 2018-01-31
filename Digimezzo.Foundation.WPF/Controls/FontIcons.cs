@@ -3,11 +3,11 @@ using System.Windows;
 
 namespace Digimezzo.Foundation.WPF.Controls
 {
-    public class FAIcon : FontIconBase
+    public class AwesomeIcon : FontIconBase
     {
-        static FAIcon()
+        static AwesomeIcon()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(FAIcon), new FrameworkPropertyMetadata(typeof(FAIcon)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(AwesomeIcon), new FrameworkPropertyMetadata(typeof(AwesomeIcon)));
         }
     }
 
