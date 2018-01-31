@@ -8,5 +8,10 @@ namespace Digimezzo.Foundation.WPF.Demo
         {
             InitializeComponent();
         }
+
+        private void HamburgerButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.MySplitView.IsPaneOpen = !this.MySplitView.IsPaneOpen;
+        }
     }
 }

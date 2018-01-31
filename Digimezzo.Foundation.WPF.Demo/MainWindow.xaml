@@ -5,7 +5,7 @@
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                               xmlns:fc="clr-namespace:Digimezzo.Foundation.WPF.Controls;assembly=Digimezzo.Foundation.WPF"
                               mc:Ignorable="d"
-                              Title="MainWindow" Height="350" Width="525">
+                              Title="MainWindow" Height="500" Width="700">
 
     <!-- Resources -->
     <Window.Resources>
@@ -42,16 +42,20 @@
             </Grid.ColumnDefinitions>
             <!-- Hamburger -->
             <Button x:Name="HamburgerButton" Grid.Column="0" Style="{StaticResource HamburgerButtonStyle}" 
-                    HorizontalAlignment="Left" Width="48" Height="48" />
+                    HorizontalAlignment="Left" Width="48" Height="48" Click="HamburgerButton_Click"/>
             <Border x:Name="MainTitleBar" Grid.Column="1" Background="Transparent"/>
         </Grid>
-        <fc:SplitView x:Name="MySplitView" Panel.ZIndex="0" IsPaneOpen="False" OpenPaneLength="300">
+        <fc:SplitView x:Name="MySplitView" Panel.ZIndex="0" IsPaneOpen="False" OpenPaneLength="300" OverlayBackground="#66000000">
             
             <fc:SplitView.Pane>
-                <TextBlock></TextBlock>
+                <Border Background="White" Width="300"></Border>
             </fc:SplitView.Pane>
             <fc:SplitView.Content>
-                <TextBlock></TextBlock>
+                <Grid Background="#00000000">
+                    <Grid Canvas.ZIndex="0">
+                       <!-- Content here -->
+                    </Grid>
+                </Grid>
             </fc:SplitView.Content>
         </fc:SplitView>
     </Grid>

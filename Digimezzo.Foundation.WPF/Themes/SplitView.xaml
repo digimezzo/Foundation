@@ -9,9 +9,13 @@
                     <Grid>
                         <ContentPresenter 
                                 x:Name="PART_Pane"
-                                Panel.ZIndex="1"
+                                Panel.ZIndex="2"
                                 ContentSource="Pane"
                                 HorizontalAlignment="Left"/>
+                        <Border x:Name="PART_Overlay"
+                                Panel.ZIndex="1"
+                                BorderThickness="0" Background="{TemplateBinding OverlayBackground}" 
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Collapsed"/>
                         <ContentPresenter 
                                 x:Name="PART_Content"
                                 Panel.ZIndex="0"

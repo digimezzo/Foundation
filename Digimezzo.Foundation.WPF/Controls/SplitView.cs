@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Digimezzo.Foundation.WPF.Controls
@@ -9,6 +11,16 @@ namespace Digimezzo.Foundation.WPF.Controls
     {
         private ContentPresenter pane;
         private ContentPresenter content;
+        private Border overlay;
+
+        public Brush OverlayBackground
+        {
+            get { return (Brush)GetValue(OverlayBackgroundProperty); }
+            set { SetValue(OverlayBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty OverlayBackgroundProperty =
+           DependencyProperty.Register(nameof(OverlayBackground), typeof(Brush), typeof(SplitView), new PropertyMetadata(null));
 
         public object Pane
         {
@@ -36,7 +48,7 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         public static readonly DependencyProperty IsPaneOpenProperty =
             DependencyProperty.Register(nameof(IsPaneOpen), typeof(bool), typeof(SplitView), new PropertyMetadata(false, OnIsPaneOpenChanged));
-       
+
 
         public double OpenPaneLength
         {
@@ -48,7 +60,7 @@ namespace Digimezzo.Foundation.WPF.Controls
           DependencyProperty.Register(nameof(OpenPaneLength), typeof(double), typeof(SplitView), new PropertyMetadata(200.0));
 
         public event EventHandler PaneClosed = delegate { };
-   
+
         private static void OnIsPaneOpenChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             SplitView splitView = o as SplitView;
@@ -63,18 +75,19 @@ namespace Digimezzo.Foundation.WPF.Controls
                 splitView.ClosePane();
             }
         }
-    
+
         static SplitView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SplitView), new FrameworkPropertyMetadata(typeof(SplitView)));
         }
-      
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             this.pane = (ContentPresenter)GetTemplateChild("PART_Pane");
             this.content = (ContentPresenter)GetTemplateChild("PART_Content");
+            this.overlay = (Border)GetTemplateChild("PART_Overlay");
 
             if (this.pane != null)
             {
@@ -105,6 +118,11 @@ namespace Digimezzo.Foundation.WPF.Controls
 
                 this.pane.BeginAnimation(ContentPresenter.MarginProperty, marginAnimation);
             }
+
+            if (this.OverlayBackground != null)
+            {
+                this.ShowOverlayAnimation();
+            }
         }
         private void ClosePane()
         {
@@ -121,6 +139,49 @@ namespace Digimezzo.Foundation.WPF.Controls
             }
 
             this.PaneClosed(this, new EventArgs());
+
+            if (this.OverlayBackground != null)
+            {
+                this.HideOverlayAnimationAsync();
+            }
+        }
+
+        private void ShowOverlayAnimation()
+        {
+            if(this.overlay == null)
+            {
+                return;
+            }
+
+            this.overlay.Visibility = Visibility.Visible;
+            this.AnimateOverlayOpacity(0.0, 1.0);
+        }
+
+        private async void HideOverlayAnimationAsync()
+        {
+            if (this.overlay == null)
+            {
+                return;
+            }
+
+            this.AnimateOverlayOpacity(1.0, 0.0);
+            await Task.Delay(250); // Give the storyboard time to finish before collapsing the overlay
+            this.overlay.Visibility = Visibility.Collapsed;
+        }
+
+        private void AnimateOverlayOpacity(double startOpacity, double endOpacity)
+        {
+            if (this.overlay == null)
+            {
+                return;
+            }
+
+            DoubleAnimation opacityAnimation = new DoubleAnimation() { From = startOpacity, To = endOpacity, Duration = TimeSpan.FromMilliseconds(150) };
+            var sb = new Storyboard();
+            sb.Children.Add(opacityAnimation);
+            Storyboard.SetTargetName(this.overlay, "PART_Overlay");
+            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UserControl.OpacityProperty));
+            sb.Begin(this.overlay);
         }
     }
 }
