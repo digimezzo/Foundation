@@ -75,7 +75,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         }
 
         public static readonly DependencyProperty OverlayBackgroundProperty =
-           DependencyProperty.Register(nameof(OverlayBackground), typeof(Brush), typeof(SplitView), new PropertyMetadata(null));
+           DependencyProperty.Register(nameof(OverlayBackground), typeof(Brush), typeof(SplitView), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0, 0, 0, 0))));
 
         public object Pane
         {
@@ -150,12 +150,12 @@ namespace Digimezzo.Foundation.WPF.Controls
                 this.pane.Margin = new Thickness(-this.OpenPaneLength - 1, 0, 0, 0);
             }
 
-            if (this.content != null)
+            if (this.overlay != null)
             {
-                this.content.MouseUp += Content_MouseUp;
+                this.overlay.MouseUp += MouseUpHandler;
             }
 
-            if(this.button != null)
+            if (this.button != null)
             {
                 this.button.Click += Button_Click;
             }
@@ -166,7 +166,7 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.IsPaneOpen = !this.IsPaneOpen;
         }
 
-        private void Content_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void MouseUpHandler(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.IsPaneOpen = false;
         }
@@ -185,10 +185,7 @@ namespace Digimezzo.Foundation.WPF.Controls
                 this.pane.BeginAnimation(ContentPresenter.MarginProperty, marginAnimation);
             }
 
-            if (this.OverlayBackground != null)
-            {
-                this.ShowOverlayAnimation();
-            }
+            this.ShowOverlayAnimation();
         }
         private void ClosePane()
         {
@@ -206,10 +203,7 @@ namespace Digimezzo.Foundation.WPF.Controls
 
             this.PaneClosed(this, new EventArgs());
 
-            if (this.OverlayBackground != null)
-            {
-                this.HideOverlayAnimationAsync();
-            }
+            this.HideOverlayAnimationAsync();
         }
 
         private void ShowOverlayAnimation()
@@ -259,9 +253,14 @@ namespace Digimezzo.Foundation.WPF.Controls
             {
                 if (disposing)
                 {
-                    if(this.button != null)
+                    if (this.button != null)
                     {
                         this.button.Click -= Button_Click;
+                    }
+
+                    if (this.overlay != null)
+                    {
+                        this.overlay.MouseUp -= MouseUpHandler;
                     }
                 }
 
