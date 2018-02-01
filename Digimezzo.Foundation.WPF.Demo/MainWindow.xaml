@@ -20,7 +20,7 @@
             </Border>
         </fwc:SplitView.Pane>
         <fwc:SplitView.Content>
-            <fwc:MaterialComboBox ValidationMode="Text" Width="270" Foreground="Black" IsEditable="True"
+            <fwc:MaterialComboBox ValidationMode="Text" Width="270" Foreground="Black"
                                               VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Text="One"></TextBlock>
                 <TextBlock Text="Two"></TextBlock>

@@ -133,13 +133,7 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.inputLabel.MouseDown += InputLabel_MouseDown;
             this.panel.Margin = this.IsFloating ? new Thickness(0, this.GetSmallFontSize() + this.GetMargin(), 0, 0) : new Thickness(0);
             this.dropDownBorder.Background = this.Background == null ? Brushes.White : this.Background;
-
             this.errorLabel.FontSize = this.GetSmallFontSize();
-            this.errorLabel.Margin = this.ValidationMode.Equals(ValidationMode.None) || this.ValidationMode.Equals(ValidationMode.Date) ? new Thickness(0) : new Thickness(0, this.GetMargin(), 0, 0);
-
-            // Workaround to get the toggle button arrow in a more esthetically 
-            // pleasing position. Addition of the error label pushes it down.
-            this.toggleButton.Margin = new Thickness(0, 0, 0, (this.errorLabel.Margin.Top + this.errorLabel.FontSize / 2));
 
             this.editableTextBox.TextChanged += this.EditableTextBox_TextChanged;
         }
