@@ -1,31 +1,32 @@
-﻿<fc:Windows10BorderlessWindow x:Class="Digimezzo.Foundation.WPF.Demo.MainWindow"
+﻿<fwc:Windows10BorderlessWindow x:Class="Digimezzo.Foundation.WPF.Demo.MainWindow"
                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                              xmlns:fc="clr-namespace:Digimezzo.Foundation.WPF.Controls;assembly=Digimezzo.Foundation.WPF"
+                              xmlns:fwc="clr-namespace:Digimezzo.Foundation.WPF.Controls;assembly=Digimezzo.Foundation.WPF"
                               mc:Ignorable="d"
                               Title="MainWindow" Height="500" Width="700">
 
     <!-- Content -->
-    <fc:SplitView x:Name="MySplitView" Panel.ZIndex="0" IsPaneOpen="False" OpenPaneLength="300" 
+    <fwc:SplitView x:Name="MySplitView" Panel.ZIndex="0" IsPaneOpen="False" OpenPaneLength="300" 
                   OverlayBackground="#66000000">
-        <fc:SplitView.ButtonContent>
-            <fc:MaterialIcon Text="&#xE5D2;" FontSize="24" Foreground="Black"/>
-        </fc:SplitView.ButtonContent>
-        <fc:SplitView.Pane>
+        <fwc:SplitView.ButtonContent>
+            <fwc:MaterialIcon Text="&#xE5D2;" FontSize="24" Foreground="Black"/>
+        </fwc:SplitView.ButtonContent>
+        <fwc:SplitView.Pane>
             <Border Background="White" Width="300">
                 <TextBlock Text="Pane content!" FontSize="20" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
-        </fc:SplitView.Pane>
-        <fc:SplitView.Content>
-            <Grid Background="#00000000">
-                <Grid Canvas.ZIndex="0">
-                    <TextBlock Text="Content!" FontSize="20" 
-                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Grid>
-            </Grid>
-        </fc:SplitView.Content>
-    </fc:SplitView>
-</fc:Windows10BorderlessWindow>
+        </fwc:SplitView.Pane>
+        <fwc:SplitView.Content>
+            <fwc:MaterialComboBox ValidationMode="Text" Width="270" Foreground="Black" IsEditable="True"
+                                              VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="One"></TextBlock>
+                <TextBlock Text="Two"></TextBlock>
+                <TextBlock Text="Three"></TextBlock>
+                <TextBlock Text="Four"></TextBlock>
+            </fwc:MaterialComboBox>
+        </fwc:SplitView.Content>
+    </fwc:SplitView>
+</fwc:Windows10BorderlessWindow>

@@ -84,7 +84,7 @@ namespace Digimezzo.Foundation.WPF.Controls
 
             if (box != null && box.inputLabel != null)
             {
-              box.inputLabel.Text = box.Label;
+                box.inputLabel.Text = box.Label;
             }
         }
 
@@ -137,6 +137,10 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.errorLabel.FontSize = this.GetSmallFontSize();
             this.errorLabel.Margin = this.ValidationMode.Equals(ValidationMode.None) || this.ValidationMode.Equals(ValidationMode.Date) ? new Thickness(0) : new Thickness(0, this.GetMargin(), 0, 0);
 
+            // Workaround to get the toggle button arrow in a more esthetically 
+            // pleasing position. Addition of the error label pushes it down.
+            this.toggleButton.Margin = new Thickness(0, 0, 0, (this.errorLabel.Margin.Top + this.errorLabel.FontSize / 2));
+
             this.editableTextBox.TextChanged += this.EditableTextBox_TextChanged;
         }
 
@@ -182,7 +186,7 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         private void SetInputLabelForeground(bool mustFocus)
         {
-            if(this.inputLabel == null)
+            if (this.inputLabel == null)
             {
                 return;
             }
@@ -364,7 +368,7 @@ namespace Digimezzo.Foundation.WPF.Controls
             {
                 if (disposing)
                 {
-                    if(this.editableTextBox != null)
+                    if (this.editableTextBox != null)
                     {
                         this.editableTextBox.TextChanged -= this.EditableTextBox_TextChanged;
                     }
