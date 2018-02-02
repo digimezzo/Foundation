@@ -33,6 +33,15 @@ namespace Digimezzo.Foundation.WPF.Controls
         public static readonly DependencyProperty IsValidProperty =
             DependencyProperty.Register(nameof(IsValid), typeof(bool), typeof(MaterialDateBox), new PropertyMetadata(true));
 
+        public DateTime SelectedDate
+        {
+            get { return (DateTime)GetValue(SelectedDateProperty); }
+            set { SetValue(SelectedDateProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectedDateProperty =
+            DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime), typeof(MaterialDateBox), new PropertyMetadata(DateTime.MinValue));
+
         public int Day
         {
             get { return (int)GetValue(DayProperty); }
@@ -205,8 +214,6 @@ namespace Digimezzo.Foundation.WPF.Controls
                     break;
             }
 
-            this.errorLabel.FontSize = this.GetSmallFontSize();
-            this.errorLabel.Margin = this.ValidationMode.Equals(ValidationMode.None) ? new Thickness(0) : new Thickness(0, this.GetMargin(), 0, 0);
             this.panel.Margin = this.IsFloating ? new Thickness(0, this.GetSmallFontSize() + this.GetMargin(), 0, 0) : new Thickness(0);
 
             this.boxDay.Label = this.LabelDay;
@@ -220,6 +227,23 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.boxDay.SelectionChanged += BoxDay_SelectionChanged;
             this.boxMonth.SelectionChanged += BoxMonth_SelectionChanged;
             this.boxYear.SelectionChanged += BoxYear_SelectionChanged;
+
+            this.SetErrorLabel();
+        }
+
+        private void SetErrorLabel()
+        {
+            if (this.ValidationMode.Equals(ValidationMode.Date))
+            {
+                this.errorLabel.Visibility = Visibility.Visible;
+                this.errorLabel.FontSize = this.GetSmallFontSize();
+                this.errorLabel.Margin = new Thickness(0, this.GetMargin(), 0, 0);
+            }
+            else
+            {
+                this.errorLabel.Visibility = Visibility.Collapsed;
+                this.errorLabel.Margin = new Thickness(0, 0, 0, 0);
+            }
         }
 
         private void BoxDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -333,11 +357,13 @@ namespace Digimezzo.Foundation.WPF.Controls
             {
                 this.errorLabel.Text = String.Empty;
                 this.IsValid = true;
+                this.SelectedDate = dateValue;
             }
             else
             {
                 this.errorLabel.Text = this.ErrorText;
                 this.IsValid = false;
+                this.SelectedDate = DateTime.MinValue;
             }
         }
 

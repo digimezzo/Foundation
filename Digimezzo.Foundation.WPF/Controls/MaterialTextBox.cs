@@ -130,9 +130,6 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.inputLabel.Opacity = this.opacity;
             this.inputLineUnfocused.Opacity = this.opacity;
 
-            this.errorLabel.FontSize = this.GetSmallFontSize();
-            this.errorLabel.Margin = this.ValidationMode.Equals(ValidationMode.None) || this.ValidationMode.Equals(ValidationMode.Date) ? new Thickness(0) : new Thickness(0, this.GetMargin(), 0, 0);
-
             this.panel.Margin = this.IsFloating ? new Thickness(0, this.GetSmallFontSize() + this.GetMargin(), 0, 0) : new Thickness(0);
 
             this.SelectionBrush = this.Accent; // Binding SelectionBrush in the xaml template doesn't work, so we set it here.
@@ -147,6 +144,23 @@ namespace Digimezzo.Foundation.WPF.Controls
             else
             {
                 this.SetInputLabelText(this.Text.Length > 0);
+            }
+
+            this.SetErrorLabel();
+        }
+
+        private void SetErrorLabel()
+        {
+            if (this.ValidationMode.Equals(ValidationMode.Text) || this.ValidationMode.Equals(ValidationMode.Number))
+            {
+                this.errorLabel.Visibility = Visibility.Visible;
+                this.errorLabel.FontSize = this.GetSmallFontSize();
+                this.errorLabel.Margin = new Thickness(0, this.GetMargin(), 0, 0);
+            }
+            else
+            {
+                this.errorLabel.Visibility = Visibility.Collapsed;
+                this.errorLabel.Margin = new Thickness(0, 0, 0, 0);
             }
         }
 

@@ -19,12 +19,15 @@
                                 <ColumnDefinition Width="18"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <controls:MaterialComboBox x:Name="PART_Box1" Grid.Column="0" Accent="{TemplateBinding Accent}" 
-                                                   IsFloating="{TemplateBinding IsFloating}"/>
-                            <controls:MaterialComboBox x:Name="PART_Box2" Grid.Column="2" Accent="{TemplateBinding Accent}" 
-                                                   IsFloating="{TemplateBinding IsFloating}"/>
-                            <controls:MaterialComboBox x:Name="PART_Box3" Grid.Column="4" Accent="{TemplateBinding Accent}" 
-                                                   IsFloating="{TemplateBinding IsFloating}"/>
+                            <controls:MaterialComboBox x:Name="PART_Box1" Grid.Column="0" ValidationMode="None"
+                                                       Accent="{TemplateBinding Accent}" Background="{TemplateBinding Background}"
+                                                       IsFloating="{TemplateBinding IsFloating}" />
+                            <controls:MaterialComboBox x:Name="PART_Box2" Grid.Column="2" ValidationMode="None"
+                                                       Accent="{TemplateBinding Accent}" Background="{TemplateBinding Background}"
+                                                       IsFloating="{TemplateBinding IsFloating}" />
+                            <controls:MaterialComboBox x:Name="PART_Box3" Grid.Column="4" ValidationMode="None"
+                                                       Accent="{TemplateBinding Accent}" Background="{TemplateBinding Background}"
+                                                       IsFloating="{TemplateBinding IsFloating}" />
                         </Grid>
                         <TextBlock x:Name="PART_ErrorLabel" Foreground="{TemplateBinding ErrorForeground}" />
                     </StackPanel>
