@@ -1,5 +1,4 @@
-﻿using Digimezzo.Foundation.Core.Helpers;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -7,7 +6,8 @@ using System.Windows.Media.Animation;
 
 namespace Digimezzo.Foundation.WPF.Controls
 {
-    public enum ValidationMode{
+    public enum ValidationMode
+    {
         None = 0,
         Number = 1,
         Text = 2,
@@ -24,6 +24,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         private StackPanel panel;
         private double opacity = 0.55;
         private bool isFocused;
+        private bool isValueChanged;
 
         public bool IsValid
         {
@@ -107,13 +108,13 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         private static void OnForegroundChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if(!(d is MaterialTextBox))
+            if (!(d is MaterialTextBox))
             {
                 return;
 
             }
 
-            var box  = (MaterialTextBox)d;
+            var box = (MaterialTextBox)d;
             box.SetCursorColor();
         }
 
@@ -141,10 +142,18 @@ namespace Digimezzo.Foundation.WPF.Controls
 
             // Initial state of the error label
             this.SetErrorLabel();
+
+            // Initial validation
+            this.Validate();
         }
 
         private void SetErrorLabel()
         {
+            if (this.errorLabel == null)
+            {
+                return;
+            }
+
             if (this.ValidationMode.Equals(ValidationMode.Text) || this.ValidationMode.Equals(ValidationMode.Number))
             {
                 this.errorLabel.Visibility = Visibility.Visible;
@@ -190,9 +199,15 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         private void ValidateText()
         {
+            if (this.errorLabel == null)
+            {
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(this.Text))
             {
-                this.errorLabel.Text = this.ErrorText;
+                // Checking isValueChanged prevents showing an error when the control initially loads with a empty value
+                this.errorLabel.Text = this.isValueChanged ? this.ErrorText : String.Empty;
                 this.IsValid = false;
             }
             else
@@ -204,6 +219,11 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         private void ValidateNumber()
         {
+            if (this.errorLabel == null)
+            {
+                return;
+            }
+
             bool isNumberValid = false;
 
             if (string.IsNullOrEmpty(this.Text))
@@ -223,7 +243,8 @@ namespace Digimezzo.Foundation.WPF.Controls
             }
             else
             {
-                this.errorLabel.Text = this.ErrorText;
+                // Checking isValueChanged prevents showing an error when the control initially loads with a empty value
+                this.errorLabel.Text = this.isValueChanged ? this.ErrorText : String.Empty;
                 this.IsValid = false;
             }
         }
@@ -231,6 +252,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             base.OnTextChanged(e);
+            this.isValueChanged = true;
             this.SetInputLabel();
             this.Validate();
         }
@@ -293,7 +315,7 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         private void AnimateInputLabel(bool mustFloat)
         {
-            if(this.inputLabel == null)
+            if (this.inputLabel == null)
             {
                 return;
             }
@@ -345,8 +367,19 @@ namespace Digimezzo.Foundation.WPF.Controls
         {
             base.OnRenderSizeChanged(sizeInfo);
 
+            this.ResizeInputLine();
+        }
+
+        private void ResizeInputLine()
+        {
+            if (this.inputLine == null)
+            {
+                return;
+            }
+
             if (this.isFocused)
             {
+                // Set width animation to null to be able to set the width manually
                 this.inputLine.BeginAnimation(WidthProperty, null);
                 this.inputLine.Width = this.ActualWidth;
             }

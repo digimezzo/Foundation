@@ -21,6 +21,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         private double opacity = 0.55;
         private bool isFocused;
         private Border dropDownBorder;
+        private bool isValueChanged;
 
         public TextBlock InputLabel => this.inputLabel;
 
@@ -141,10 +142,18 @@ namespace Digimezzo.Foundation.WPF.Controls
 
             // Initial state of the error label
             this.SetErrorLabel();
+
+            // Initial validation
+            this.Validate();
         }
 
         private void SetErrorLabel()
         {
+            if(this.errorLabel == null)
+            {
+                return;
+            }
+
             if (this.ValidationMode.Equals(ValidationMode.Text) || this.ValidationMode.Equals(ValidationMode.Number))
             {
                 this.errorLabel.Visibility = Visibility.Visible;
@@ -170,16 +179,15 @@ namespace Digimezzo.Foundation.WPF.Controls
                 return;
             }
 
-            // This workaround changes the color of the cursor
-            // WPF sets it to the inverse of the Background color  
             if (this.editableTextBox == null)
             {
                 return;
             }
 
+            // This workaround changes the color of the cursor
+            // WPF sets it to the inverse of the Background color  
             var col = ((SolidColorBrush)this.Foreground).Color;
             this.editableTextBox.Background = new SolidColorBrush(Color.FromRgb((byte)~col.R, (byte)~col.G, (byte)~col.B));
-            //this.Background = new SolidColorBrush(Color.FromRgb((byte)~col.R, (byte)~col.G, (byte)~col.B));
         }
 
         private void InputLabel_MouseDown(object sender, MouseButtonEventArgs e)
@@ -212,6 +220,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         protected override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
             base.OnSelectionChanged(e);
+            this.isValueChanged = true;
             this.SetInputLabel();
             this.Validate();
         }
@@ -313,8 +322,19 @@ namespace Digimezzo.Foundation.WPF.Controls
         {
             base.OnRenderSizeChanged(sizeInfo);
 
+            this.ResizeInputLine();
+        }
+
+        private void ResizeInputLine()
+        {
+            if (this.inputLine == null)
+            {
+                return;
+            }
+
             if (this.isFocused)
             {
+                // Set width animation to null to be able to set the width manually
                 this.inputLine.BeginAnimation(WidthProperty, null);
                 this.inputLine.Width = this.ActualWidth;
             }
@@ -339,9 +359,15 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         private void ValidateText()
         {
+            if(this.errorLabel == null)
+            {
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(this.Text))
             {
-                this.errorLabel.Text = this.ErrorText;
+                // Checking isValueChanged prevents showing an error when the control initially loads with a empty value
+                this.errorLabel.Text = this.isValueChanged ? this.ErrorText : String.Empty;
                 this.IsValid = false;
             }
             else
@@ -353,6 +379,11 @@ namespace Digimezzo.Foundation.WPF.Controls
 
         private void ValidateNumber()
         {
+            if (this.errorLabel == null)
+            {
+                return;
+            }
+
             bool isNumberValid = false;
 
             if (string.IsNullOrEmpty(this.Text))
@@ -372,7 +403,8 @@ namespace Digimezzo.Foundation.WPF.Controls
             }
             else
             {
-                this.errorLabel.Text = this.ErrorText;
+                // Checking isValueChanged prevents showing an error when the control initially loads with a empty value
+                this.errorLabel.Text = this.isValueChanged ? this.ErrorText : String.Empty;
                 this.IsValid = false;
             }
         }
