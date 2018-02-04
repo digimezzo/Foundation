@@ -136,6 +136,10 @@ namespace Digimezzo.Foundation.WPF.Controls
 
             this.editableTextBox.TextChanged += this.EditableTextBox_TextChanged;
 
+            // Initial state of the input label
+            this.SetInputLabel();
+
+            // Initial state of the error label
             this.SetErrorLabel();
         }
 
@@ -208,17 +212,20 @@ namespace Digimezzo.Foundation.WPF.Controls
         protected override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
             base.OnSelectionChanged(e);
+            this.SetInputLabel();
+            this.Validate();
+        }
 
+        private void SetInputLabel()
+        {
             if (this.IsFloating)
             {
-                this.AnimateInputLabel(this.Text.Length > 0);
+                this.AnimateInputLabel(!string.IsNullOrEmpty(this.Text));
             }
             else
             {
-                this.SetInputLabelText(this.Text.Length > 0);
+                this.SetInputLabelText(!string.IsNullOrEmpty(this.Text));
             }
-
-            this.Validate();
         }
 
         private void SetInputLabelText(bool mustClear)

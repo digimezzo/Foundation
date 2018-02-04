@@ -137,15 +137,9 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.SetCursorColor();
 
             // Initial state of the input label
-            if (this.IsFloating)
-            {
-                this.AnimateInputLabel(isFocused | this.Text.Length > 0);
-            }
-            else
-            {
-                this.SetInputLabelText(this.Text.Length > 0);
-            }
+            this.SetInputLabel();
 
+            // Initial state of the error label
             this.SetErrorLabel();
         }
 
@@ -237,17 +231,20 @@ namespace Digimezzo.Foundation.WPF.Controls
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             base.OnTextChanged(e);
+            this.SetInputLabel();
+            this.Validate();
+        }
 
+        private void SetInputLabel()
+        {
             if (this.IsFloating)
             {
-                this.AnimateInputLabel(isFocused | this.Text.Length > 0);
+                this.AnimateInputLabel(isFocused | !string.IsNullOrEmpty(this.Text));
             }
             else
             {
-                this.SetInputLabelText(this.Text.Length > 0);
+                this.SetInputLabelText(!string.IsNullOrEmpty(this.Text));
             }
-
-            this.Validate();
         }
 
         protected override void OnIsKeyboardFocusedChanged(DependencyPropertyChangedEventArgs e)
