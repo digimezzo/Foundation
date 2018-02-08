@@ -341,7 +341,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         }
 
         public static readonly DependencyProperty SelectedHeaderFontWeightProperty =
-             DependencyProperty.Register(nameof(SelectedHeaderFontWeight), typeof(FontWeight), typeof(PivotItem), new PropertyMetadata(FontWeights.Normal));
+             DependencyProperty.Register(nameof(SelectedHeaderFontWeight), typeof(FontWeight), typeof(PivotItem), new PropertyMetadata(null));
 
         public double HeaderFontSize
         {
