@@ -256,7 +256,6 @@ namespace Digimezzo.Foundation.Core.Utils
             {
                 using (MemoryStream ms = new MemoryStream(byteData))
                 {
-
                     BitmapImage bi = new BitmapImage();
 
                     bi.BeginInit();
@@ -369,17 +368,20 @@ namespace Digimezzo.Foundation.Core.Utils
         {
             byte[] outputImage = null;
 
-            MemoryStream inputMemoryStream = new MemoryStream(inputImage);
-            Image fullsizeImage = Image.FromStream(inputMemoryStream);
+            if(inputImage != null)
+            {
+                MemoryStream inputMemoryStream = new MemoryStream(inputImage);
+                Image fullsizeImage = Image.FromStream(inputMemoryStream);
 
-            Bitmap fullSizeBitmap = new Bitmap(fullsizeImage, new Size(width, height));
-            MemoryStream resultStream = new MemoryStream();
+                Bitmap fullSizeBitmap = new Bitmap(fullsizeImage, new Size(width, height));
+                MemoryStream resultStream = new MemoryStream();
 
-            fullSizeBitmap.Save(resultStream, fullsizeImage.RawFormat);
+                fullSizeBitmap.Save(resultStream, fullsizeImage.RawFormat);
 
-            outputImage = resultStream.ToArray();
-            resultStream.Dispose();
-            resultStream.Close();
+                outputImage = resultStream.ToArray();
+                resultStream.Dispose();
+                resultStream.Close();
+            }
 
             return outputImage;
         }
