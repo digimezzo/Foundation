@@ -367,7 +367,7 @@ namespace Digimezzo.Foundation.Core.Utils
         /// <returns>The rescaled image</returns>
         public static byte[] ResizeImageInByteArray(byte[] inputImage, int width, int height)
         {
-            byte[] outputImage = inputImage;
+            byte[] outputImage = null;
 
             MemoryStream inputMemoryStream = new MemoryStream(inputImage);
             Image fullsizeImage = Image.FromStream(inputMemoryStream);
