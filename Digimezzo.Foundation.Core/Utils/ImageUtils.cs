@@ -357,5 +357,31 @@ namespace Digimezzo.Foundation.Core.Utils
 
             return System.Windows.Media.Color.FromRgb(color.R, color.G, color.B); ;
         }
+
+        /// <summary>
+        /// Rescales an image in a byte[] to another byte[]
+        /// </summary>
+        /// <param name="inputImage">The image to rescale</param>
+        /// <param name="width">The width to which the image should to be rescaled</param>
+        /// <param name="height">The height to which the image should to be rescaled</param>
+        /// <returns>The rescaled image</returns>
+        public static byte[] ResizeImageInByteArray(byte[] inputImage, int width, int height)
+        {
+            byte[] outputImage = inputImage;
+
+            MemoryStream inputMemoryStream = new MemoryStream(inputImage);
+            Image fullsizeImage = Image.FromStream(inputMemoryStream);
+
+            Bitmap fullSizeBitmap = new Bitmap(fullsizeImage, new Size(width, height));
+            MemoryStream resultStream = new MemoryStream();
+
+            fullSizeBitmap.Save(resultStream, fullsizeImage.RawFormat);
+
+            outputImage = resultStream.ToArray();
+            resultStream.Dispose();
+            resultStream.Close();
+
+            return outputImage;
+        }
     }
 }

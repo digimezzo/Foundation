@@ -224,6 +224,31 @@ namespace Digimezzo.Foundation.WPF.Controls
             this.boxMonth.ItemsSource = this.Months();
             this.boxYear.ItemsSource = this.Years();
 
+            // Set the initial values of the boxes
+            if (this.SelectedDate != null && !this.SelectedDate.Equals(DateTime.MinValue))
+            {
+                this.boxDay.SelectedItem = this.SelectedDate.Day;
+                this.boxMonth.SelectedItem = this.SelectedDate.Month;
+                this.boxYear.SelectedItem = this.SelectedDate.Year;
+            }
+            else
+            {
+                if (this.Day > 0)
+                {
+                    this.boxDay.SelectedItem = this.Day;
+                }
+
+                if (this.Month > 0)
+                {
+                    this.boxMonth.SelectedItem = this.Month;
+                }
+
+                if (this.Year > 0)
+                {
+                    this.boxYear.SelectedItem = this.Year;
+                }
+            }
+
             this.boxDay.SelectionChanged += BoxDay_SelectionChanged;
             this.boxMonth.SelectionChanged += BoxMonth_SelectionChanged;
             this.boxYear.SelectionChanged += BoxYear_SelectionChanged;
