@@ -88,21 +88,31 @@ namespace Digimezzo.Foundation.Core.Utils
         /// Converts an image file to a Byte array
         /// </summary>
         /// <param name="filename">The image file</param>
+        /// /// <param name="width">The width to which the image should be rescaled (no rescale when 0)</param>
+        /// <param name="height">The height to which the image should be rescaled (no rescale when 0)</param>
         /// <returns>A Byte array</returns>
-        public static byte[] Image2ByteArray(string filename)
+        public static byte[] Image2ByteArray(string filename, int width, int height)
         {
             byte[] byteArray = null;
 
             try
             {
                 if (string.IsNullOrEmpty(filename))
+                {
                     return null;
+                }
 
                 Bitmap bmp = default(Bitmap);
 
                 using (Bitmap tempBmp = new Bitmap(filename))
                 {
                     bmp = new Bitmap(tempBmp);
+
+                    if (width > 0 && height > 0)
+                    {
+                        Bitmap scaledBmp = new Bitmap(bmp, new Size(width, height));
+                        bmp = scaledBmp;
+                    }
                 }
 
                 ImageConverter converter = new ImageConverter();
