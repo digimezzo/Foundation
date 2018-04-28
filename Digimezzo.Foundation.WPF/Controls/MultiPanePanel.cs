@@ -227,7 +227,8 @@ namespace Digimezzo.Foundation.WPF.Controls
                     totalWidth = this.ActualWidth - this.ResizeGripWidth * 2;
                     double newRightPaneWidth = Convert.ToDouble(totalWidth * this.RightPaneWidthPercent / 100);
                     this.rightPane.Width = newRightPaneWidth > this.RightPaneMinimumWidth ? newRightPaneWidth : this.RightPaneMinimumWidth;
-                    this.middlePane.Width = totalWidth - this.leftPane.Width - this.rightPane.Width;
+                    double proposedWidth = totalWidth - this.leftPane.Width - this.rightPane.Width;
+                    this.middlePane.Width = proposedWidth >= 0 ? proposedWidth : 0.0;
                 }
                 else
                 {
