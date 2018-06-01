@@ -114,6 +114,7 @@ namespace Digimezzo.Foundation.WPF.Controls
         public static readonly DependencyProperty OpenPaneLengthProperty =
           DependencyProperty.Register(nameof(OpenPaneLength), typeof(double), typeof(SplitView), new PropertyMetadata(200.0));
 
+        public event EventHandler PaneOpened = delegate { };
         public event EventHandler PaneClosed = delegate { };
 
         private static void OnIsPaneOpenChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
@@ -184,6 +185,8 @@ namespace Digimezzo.Foundation.WPF.Controls
 
                 this.pane.BeginAnimation(ContentPresenter.MarginProperty, marginAnimation);
             }
+
+            this.PaneOpened(this, new EventArgs());
 
             this.ShowOverlayAnimation();
         }
