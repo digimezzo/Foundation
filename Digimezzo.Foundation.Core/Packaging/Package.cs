@@ -75,11 +75,42 @@ namespace Digimezzo.Foundation.Core.Packaging
             }
         }
 
+        public string FormattedVersionNoBuildWithLabel
+        {
+            get
+            {
+                string versionType = this.Version.Revision.ToString().Substring(0, 1);
+                string versionTypeNumber = this.Version.Revision.ToString().Substring(1, 3).TrimStart(new Char[] { '0' });
+                string returnValue = string.Empty;
+
+                switch (versionType)
+                {
+                    case "1":
+                        returnValue = $"{this.FormattedVersionNoBuild} (Preview {versionTypeNumber})";
+                        break;
+                    case "2":
+                        returnValue = $"{this.FormattedVersionNoBuild} (Beta {versionTypeNumber})";
+                        break;
+                    case "3":
+                        returnValue = $"{this.FormattedVersionNoBuild} (Release Candidate {versionTypeNumber})";
+                        break;
+                    case "4":
+                        returnValue = $"{this.FormattedVersionNoBuild} (Release)";
+                        break;
+                    default:
+                        returnValue = this.FormattedVersionNoBuild;
+                        break;
+                }
+
+                return returnValue;
+            }
+        }
+
         public string Filename
         {
             get
             {
-                return string.Format("{0} {1}", this.name, this.version.ToString());
+                return string.Format("{0} {1}", this.name, this.FormattedVersionNoBuildWithLabel);
             }
         }
 
